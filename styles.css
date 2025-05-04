@@ -55,9 +55,11 @@ nav ul li a:hover {
 #darkModeToggle {
   background: none;
   border: none;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   cursor: pointer;
-  color: var(--branco);
+  padding: 0.5rem;
+  position: relative;
+  z-index: 1000;
 }
 
 .hero {
@@ -344,7 +346,9 @@ nav ul li a {
   }
 
   #darkModeToggle {
-    margin-top: 10px;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
 
   .hero {
