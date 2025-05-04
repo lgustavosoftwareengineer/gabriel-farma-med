@@ -1,17 +1,17 @@
-import { diseases } from './diseases.js';
+import { diseases } from "./diseases.js";
 
 const params = new URLSearchParams(window.location.search);
-const medName = params.get('medicamento');
-const origem = params.get('origem') || 'medicamentos';
+const medName = params.get("medicamento");
+const origem = params.get("origem") || "medicamentos";
 
-const medDetails = document.getElementById('medDetails');
-const medTitle = document.getElementById('medName');
+const medDetails = document.getElementById("medDetails");
+const medTitle = document.getElementById("medName");
 
 let found = null;
 
 // Procurar o medicamento em todas as doenças
 for (const disease of diseases) {
-  const match = disease.medicines?.find(m => m.name === medName);
+  const match = disease.medicines?.find((m) => m.name === medName);
   if (match) {
     found = match;
     break;
@@ -33,11 +33,15 @@ if (found) {
     <p><strong>Mecanismo de ação:</strong> ${found.mechanismOfAction}</p>
     <p><strong>Ingrediente ativo:</strong> ${found.activeIngredient}</p>
     <p><strong>Interações medicamentosas:</strong> ${found.drugInteractions}</p>
-    ${found.leafletUrl ? `
-      <a class="bula-button" href="${found.leafletUrl}" target="_blank" rel="noopener noreferrer">
+    ${
+      found.leafletAnvisaUrl
+        ? `
+      <a class="bula-button" href="${found.leafletAnvisaUrl}" target="_blank" rel="noopener noreferrer">
         📄 Ver Bula Original
       </a>
-    ` : ''}
+    `
+        : ""
+    }
   `;
 } else {
   medTitle.textContent = "Medicamento não encontrado";
