@@ -1,0 +1,491 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+:root {
+  --vermelho: #fe4f2d;
+  --bege: #fdfbee;
+  --verde-escuro: #005551;
+  --fundo-escuro: #003c3a;
+  --texto: #002b2a;
+  --branco: #ffffff;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bege);
+  color: var(--texto);
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--verde-escuro);
+  color: var(--branco);
+  padding: 15px 30px;
+}
+
+.logo img {
+  height: 60px;
+  display: block;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  color: var(--branco);
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: var(--vermelho);
+}
+
+#darkModeToggle {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: var(--branco);
+}
+
+.hero {
+  text-align: center;
+  background-color: var(--verde-escuro);
+  color: var(--branco);
+  padding: 50px 20px;
+}
+
+.hero h1 {
+  font-size: 2.5em;
+}
+
+.hero p {
+  font-size: 1.2em;
+}
+
+#searchBox {
+  width: 60%;
+  padding: 10px;
+  font-size: 1.2em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+.content {
+  padding: 30px;
+}
+
+.info-card,
+.card {
+  background-color: var(--branco);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.info-card:hover,
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.med-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.med-buttons button,
+.med-buttons .bula-button {
+  background-color: var(--vermelho);
+  color: var(--branco);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.med-buttons button:hover,
+.med-buttons .bula-button:hover {
+  background-color: #d63c1f;
+}
+
+.botao {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: var(--vermelho);
+  color: var(--branco);
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: background-color 0.3s;
+}
+
+.botao:hover {
+  background-color: #d63c1f;
+}
+
+.back-button {
+  margin: 20px 30px;
+  padding: 10px 20px;
+  background-color: var(--verde-escuro);
+  color: var(--branco);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: var(--vermelho);
+  transform: scale(1.03);
+}
+
+footer {
+  background-color: var(--verde-escuro);
+  color: var(--branco);
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+
+body.dark-mode {
+  background-color: var(--fundo-escuro);
+  color: var(--branco);
+}
+
+body.dark-mode .hero,
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #002b2a;
+}
+
+body.dark-mode .info-card,
+body.dark-mode .card {
+  background-color: #3b3b3b;
+  color: var(--branco);
+}
+
+body.dark-mode .botao,
+body.dark-mode .med-buttons button,
+body.dark-mode .bula-button {
+  background-color: #fe4f2d;
+  color: var(--branco);
+}
+
+body.dark-mode .botao:hover,
+body.dark-mode .med-buttons button:hover,
+body.dark-mode .bula-button:hover {
+  background-color: #e23c1c;
+}
+
+.hidden {
+  display: none;
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--vermelho);
+  color: var(--branco);
+  border: none;
+  padding: 10px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+}
+
+#backToTop:hover {
+  background-color: #d63c1f;
+}
+
+body,
+header,
+footer,
+.hero,
+.card,
+.info-card,
+#searchBox,
+#backToTop,
+nav ul li a {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Menu Styles */
+.desktop-menu {
+  display: block;
+}
+
+.desktop-menu ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.desktop-menu ul li a {
+  color: var(--branco);
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.desktop-menu ul li a:hover {
+  color: var(--vermelho);
+}
+
+.mobile-menu {
+  display: none;
+  position: relative;
+}
+
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--branco);
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.mobile-menu-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--verde-escuro);
+  padding: 15px;
+  z-index: 1000;
+}
+
+.mobile-menu-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu-content ul li {
+  margin: 10px 0;
+}
+
+.mobile-menu-content ul li a {
+  color: var(--branco);
+  text-decoration: none;
+  font-size: 1.1em;
+  display: block;
+  padding: 8px 0;
+}
+
+.mobile-menu-content ul li a:hover {
+  color: var(--vermelho);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .logo img {
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+    width: 100%;
+  }
+
+  .mobile-menu-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .mobile-menu-content.active {
+    display: block;
+  }
+
+  #darkModeToggle {
+    margin-top: 10px;
+  }
+
+  .hero {
+    padding: 30px 15px;
+  }
+
+  .hero h1 {
+    font-size: 2em;
+  }
+
+  .hero p {
+    font-size: 1em;
+  }
+
+  #searchBox {
+    width: 90%;
+    font-size: 1em;
+  }
+
+  .content {
+    padding: 15px;
+  }
+
+  .info-card,
+  .card {
+    padding: 15px;
+  }
+
+  .med-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .med-buttons button,
+  .med-buttons .bula-button {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .back-button {
+    margin: 15px;
+    width: calc(100% - 30px);
+    text-align: center;
+  }
+
+  #backToTop {
+    bottom: 15px;
+    right: 15px;
+    padding: 8px 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8em;
+  }
+
+  .content h2 {
+    font-size: 1.5em;
+  }
+
+  .info-card strong {
+    font-size: 1.1em;
+  }
+
+  .info-card p {
+    font-size: 0.9em;
+  }
+}
+
+/* Bottom Mobile Navigation */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--verde-escuro);
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.mobile-bottom-nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-bottom-nav ul li {
+  text-align: center;
+}
+
+.mobile-bottom-nav ul li a {
+  color: var(--branco);
+  text-decoration: none;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.mobile-bottom-nav ul li a i {
+  font-size: 1.2em;
+}
+
+.mobile-bottom-nav ul li a.active {
+  color: var(--vermelho);
+}
+
+/* Adjust main content for bottom nav */
+@media screen and (max-width: 768px) {
+  main {
+    padding-bottom: 60px; /* Space for bottom nav */
+  }
+
+  .mobile-bottom-nav {
+    display: block;
+  }
+
+  /* Hide the top mobile menu button since we have bottom nav */
+  .mobile-menu-button {
+    display: none;
+  }
+
+  .mobile-menu-content {
+    display: none !important;
+  }
+}
+
+/* Dark mode adjustments for bottom nav */
+body.dark-mode .mobile-bottom-nav {
+  background-color: #002b2a;
+}
+
+body.dark-mode .mobile-bottom-nav ul li a {
+  color: var(--branco);
+}
+
+body.dark-mode .mobile-bottom-nav ul li a.active {
+  color: var(--vermelho);
+}

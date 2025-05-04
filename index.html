@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informações Médicas</title>
+    <link rel="stylesheet" href="styles.css?v=6" />
+    <script type="module" src="script.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo SG" />
+      </div>
+      <nav class="desktop-menu">
+        <ul>
+          <li>
+            <a href="#medicamentos" onclick="showCategory('medicamentos')"
+              >Medicamentos</a
+            >
+          </li>
+          <li>
+            <a
+              href="#doencas-cronicas"
+              onclick="showCategory('doencas-cronicas')"
+              >Doenças Crônicas</a
+            >
+          </li>
+          <li>
+            <a
+              href="#doencas-negligenciadas"
+              onclick="showCategory('doencas-negligenciadas')"
+              >Doenças Negligenciadas</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <nav class="mobile-menu">
+        <button class="mobile-menu-button" onclick="toggleMobileMenu()">
+          ☰
+        </button>
+        <div class="mobile-menu-content">
+          <ul>
+            <li>
+              <a href="#medicamentos" onclick="showCategory('medicamentos')"
+                >Medicamentos</a
+              >
+            </li>
+            <li>
+              <a
+                href="#doencas-cronicas"
+                onclick="showCategory('doencas-cronicas')"
+                >Doenças Crônicas</a
+              >
+            </li>
+            <li>
+              <a
+                href="#doencas-negligenciadas"
+                onclick="showCategory('doencas-negligenciadas')"
+                >Doenças Negligenciadas</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <button id="darkModeToggle" onclick="toggleDarkMode()">🌙</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Informações Médicas</h1>
+        <p>Saiba mais sobre medicamentos e doenças</p>
+        <input
+          type="text"
+          id="searchBox"
+          placeholder="Buscar..."
+          onkeyup="search()"
+        />
+      </section>
+
+      <section id="medicamentos" class="content hidden">
+        <h2>Medicamentos</h2>
+        <div id="medicamentosContainer"></div>
+      </section>
+
+      <section id="doencas-cronicas" class="content hidden">
+        <h2>Doenças Crônicas</h2>
+        <div id="cronicasContainer"></div>
+      </section>
+
+      <section id="doencas-negligenciadas" class="content hidden">
+        <h2>Doenças Negligenciadas</h2>
+        <div id="negligenciadasContainer"></div>
+      </section>
+    </main>
+
+    <button id="backToTop" onclick="scrollToTop()">⬆ Voltar ao Topo</button>
+
+    <footer>
+      <p>&copy; 2025 Informações Médicas</p>
+    </footer>
+
+    <nav class="mobile-bottom-nav">
+      <ul>
+        <li>
+          <a
+            href="#medicamentos"
+            onclick="showCategory('medicamentos')"
+            id="nav-medicamentos"
+          >
+            <i class="fas fa-pills"></i>
+            <span>Medicamentos</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#doencas-cronicas"
+            onclick="showCategory('doencas-cronicas')"
+            id="nav-cronicas"
+          >
+            <i class="fas fa-heartbeat"></i>
+            <span>Crônicas</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#doencas-negligenciadas"
+            onclick="showCategory('doencas-negligenciadas')"
+            id="nav-negligenciadas"
+          >
+            <i class="fas fa-virus"></i>
+            <span>Negligenciadas</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <script type="module">
+      import { diseases } from "./diseases.js";
+
+      function showCategory(id) {
+        document.querySelectorAll(".content").forEach((section) => {
+          section.classList.add("hidden");
+        });
+        document.getElementById(id).classList.remove("hidden");
+
+        // Update active state in bottom navigation
+        document.querySelectorAll(".mobile-bottom-nav a").forEach((link) => {
+          link.classList.remove("active");
+        });
+        document
+          .getElementById(`nav-${id.split("-")[0]}`)
+          .classList.add("active");
+      }
+
+      window.showCategory = showCategory;
+
+      const cronicas = diseases.filter((d) => d.category === "cronica");
+      const negligenciadas = diseases.filter(
+        (d) => d.category === "negligenciada"
+      );
+
+      const renderDoencas = (containerId, lista, origem) => {
+        const container = document.getElementById(containerId);
+        container.innerHTML = lista
+          .map(
+            (d) => `
+        <div class="info-card" onclick="window.location.href='detalhe-doenca.html?doenca=${encodeURIComponent(
+          d.name
+        )}&origem=${origem}'">
+          <strong>${d.name}</strong>
+          <p>${d.indication || d.causes}</p>
+        </div>
+      `
+          )
+          .join("");
+      };
+
+      const renderMedicamentos = () => {
+        const container = document.getElementById("medicamentosContainer");
+        const todosMedicamentos = diseases.flatMap((d) =>
+          d.medicines.map((m) => ({ ...m, disease: d.name }))
+        );
+
+        container.innerHTML = todosMedicamentos
+          .map(
+            (m) => `
+        <div class="info-card" onclick="window.location.href='detalhe-medicamento.html?medicamento=${encodeURIComponent(
+          m.name
+        )}&origem=medicamentos'">
+          <strong>${m.name}</strong>
+          <p>${m.indication}</p>
+        </div>
+      `
+          )
+          .join("");
+      };
+
+      renderDoencas("cronicasContainer", cronicas, "cronicas");
+      renderDoencas(
+        "negligenciadasContainer",
+        negligenciadas,
+        "negligenciadas"
+      );
+      renderMedicamentos();
+
+      function toggleDarkMode() {
+        const dark = document.body.classList.toggle("dark-mode");
+        localStorage.setItem("darkMode", dark ? "enabled" : "disabled");
+      }
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function search() {
+        const query = document.getElementById("searchBox").value.toLowerCase();
+        document.querySelectorAll(".info-card").forEach((card) => {
+          const text = card.innerText.toLowerCase();
+          card.style.display = text.includes(query) ? "block" : "none";
+        });
+      }
+
+      function toggleMobileMenu() {
+        const mobileMenu = document.querySelector(".mobile-menu-content");
+        mobileMenu.classList.toggle("active");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const hash = window.location.hash;
+        if (hash === "#doencas-cronicas") {
+          showCategory("doencas-cronicas");
+        } else if (hash === "#doencas-negligenciadas") {
+          showCategory("doencas-negligenciadas");
+        } else {
+          showCategory("medicamentos");
+        }
+
+        if (localStorage.getItem("darkMode") === "enabled") {
+          document.body.classList.add("dark-mode");
+        }
+      });
+
+      window.toggleDarkMode = toggleDarkMode;
+      window.scrollToTop = scrollToTop;
+      window.search = search;
+      window.toggleMobileMenu = toggleMobileMenu;
+    </script>
+  </body>
+</html>
